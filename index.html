@@ -1,13 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proposal</title>
+<meta charset="UTF-8">
+<title>Will You Marry Me?</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:Arial;
+background:#ffdde1;
+overflow:hidden;
+}
+/* heart rain */
+.rainHeart{
+position:absolute;
+font-size:30px;
+animation:rain 3s linear infinite;
+}
+
+@keyframes rain{
+0%{transform:translateY(-10vh);}
+100%{transform:translateY(100vh);}
+}
+/* floating hearts */
+.heart{
+position:absolute;
+color:red;
+font-size:24px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh);opacity:1;}
+100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* rose petals */
+.petal{
+position:absolute;
+color:#ff4d6d;
+font-size:22px;
+animation:fall 7s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-10vh) rotate(0deg);}
+100%{transform:translateY(100vh) rotate(360deg);}
+}
+
+/* card */
+.container{
+text-align:center;
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 0 25px rgba(0,0,0,0.2);
+z-index:1;
+}
+
+h1{
+color:#e6005c;
+font-size:38px;
+}
+
+/* typing text */
+#message{
+font-size:20px;
+margin-bottom:20px;
+color:#444;
+height:30px;
+}
+
+/* buttons */
+button{
+padding:12px 25px;
+font-size:18px;
+margin:10px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+
+#yes{
+background:#ff4d6d;
+color:white;
+}
+
+#no{
+background:gray;
+color:white;
+position:relative;
+}
+
+/* ring */
+#ring{
+font-size:70px;
+display:none;
+animation:pop 1s ease forwards;
+}
+
+@keyframes pop{
+0%{transform:scale(0);}
+100%{transform:scale(1.6);}
+}
+
+/* fireworks */
+.firework{
+position:absolute;
+font-size:40px;
+animation:boom 1.5s ease-out forwards;
+}
+
+@keyframes boom{
+0%{transform:scale(0);opacity:1;}
+100%{transform:scale(3);opacity:0;}
+}
+
+</style>
 </head>
+
 <body>
-    <h1>Proposal</h1>
-    <p>This is a proposal presentation page.</p>
-    <p>Date created: 2026-03-08 17:39:55 (UTC)</p>
+
+<div class="container">
+
+
+<h1>💍 Bangu Will You Marry Me? ❤️</h1>
+
+<div id="message"></div>
+
+<div id="ring">💍</div>
+
+<button id="yes" onclick="yesClicked()">Yes</button>
+<button id="no" onmouseover="moveNo()">No</button>
+<div id="finalMessage" style="font-size:22px;color:#e6005c;margin-top:15px;"></div>
+
+
+</div>
+<div id="timeline" style="display:none; text-align:center; margin-top:30px;">
+
+<h2 style="color:#e6005c;">❤️ Our Love Story ❤️</h2>
+
+<div style="margin:15px;">💫 The Day We Met — 21-Jan-2023</div>
+
+<div style="margin:15px;">😊 First Meet — Chennai near Aadhithi PG</div>
+
+<div style="margin:15px;">🌿 First Outing — Vandaloor Zoo</div>
+
+<div style="margin:15px;">💍 First Proposal — 21-Dec-2025</div>
+
+</div>
+
+<div id="finalScreen" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#ffdde1;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-size:40px;
+color:#e6005c;
+text-align:center;
+z-index:10;
+">
+
+<div id="loveText">
+Sriram ❤️ Bhavya <br>
+Forever💍
+</div>
+
+</div>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8e0a6f4b7.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* typing message */
+const text="From the moment I met you, my life changed ❤️";
+let i=0;
+
+function typeWriter(){
+if(i<text.length){
+document.getElementById("message").innerHTML+=text.charAt(i);
+i++;
+setTimeout(typeWriter,60);
+}
+}
+
+typeWriter();
+
+/* floating hearts */
+function createHeart(){
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(20+Math.random()*30)+"px";
+heart.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(heart);
+
+setTimeout(()=>{heart.remove();},6000);
+}
+
+setInterval(createHeart,300);
+
+/* rose petals */
+function createPetal(){
+const petal=document.createElement("div");
+petal.className="petal";
+petal.innerHTML="🌹";
+petal.style.left=Math.random()*100+"vw";
+petal.style.animationDuration=(5+Math.random()*4)+"s";
+document.body.appendChild(petal);
+
+setTimeout(()=>{petal.remove();},7000);
+}
+
+setInterval(createPetal,500);
+
+/* fireworks */
+function createFirework(){
+const fire=document.createElement("div");
+fire.className="firework";
+fire.innerHTML="✨";
+fire.style.left=Math.random()*100+"vw";
+fire.style.top=Math.random()*100+"vh";
+document.body.appendChild(fire);
+
+setTimeout(()=>{fire.remove();},1500);
+}
+
+function createHeartRain(){
+
+const heart=document.createElement("div");
+
+heart.className="rainHeart";
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},3000);
+
+}
+
+/* YES click */
+function yesClicked(){
+
+document.getElementById("ring").style.display="block";
+document.getElementById("music").play();
+
+/* disable YES */
+const yesBtn=document.getElementById("yes");
+yesBtn.disabled=true;
+yesBtn.innerHTML="❤️ Accepted ❤️";
+
+/* remove NO button */
+document.getElementById("no").style.display="none";
+
+/* message */
+document.getElementById("finalMessage").innerHTML="💖 Our forever starts today ❤️";
+
+/* show timeline */
+document.getElementById("timeline").style.display="block";
+
+/* fireworks */
+for(let j=0;j<20;j++){
+setTimeout(createFirework,j*100);
+}
+
+/* heart rain */
+setInterval(createHeartRain,200);
+
+/* show final screen after 5 seconds */
+setTimeout(()=>{
+
+document.getElementById("finalScreen").style.display="flex";
+heartExplosion();
+
+},5000);
+
+}
+/* NO escape */
+let size=1;
+let noClicks = 0;
+
+function heartExplosion(){
+
+for(let i=0;i<40;i++){
+
+const heart=document.createElement("div");
+
+heart.className="explodeHeart";
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},1500);
+
+}
+
+}
+
+function moveNo(){
+
+const btn=document.getElementById("no");
+
+const x=Math.random()*(window.innerWidth-btn.offsetWidth);
+const y=Math.random()*(window.innerHeight-btn.offsetHeight);
+
+btn.style.position="absolute";
+btn.style.left=x+"px";
+btn.style.top=y+"px";
+
+size=size*0.9;
+btn.style.transform="scale("+size+")";
+}
+
+</script>
+
 </body>
 </html>
